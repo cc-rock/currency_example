@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/currency_conversion">
+
+    <fragment android:id="@+id/currency_conversion" android:name="com.example.currencies.conversion.view.CurrencyConversionFragment"
+              android:label="Currency Conversion" tools:layout="@layout/fragment_currency_conversion">
+        <action android:id="@+id/to_currency_compare"
+                app:destination="@id/currency_compare"/>
+    </fragment>
+    <fragment android:id="@+id/currency_compare" android:name="com.example.currencies.compare.view.CurrencyCompareFragment"
+              android:label="Currency Compare" tools:layout="@layout/fragment_currency_compare"/>
+
+</navigation>
