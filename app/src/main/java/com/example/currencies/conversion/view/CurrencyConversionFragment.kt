@@ -6,6 +6,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencies.R
@@ -33,6 +35,15 @@ class CurrencyConversionFragment : DaggerFragment(), CurrencyConversionView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         currencies_table.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         currencies_table.adapter = adapter
+        savedInstanceState?.let {
+            adapter.restoreState(it)
+        }
+        presenter.viewCreated(this, savedInstanceState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        // set listeners after the view has been restored, to avoid triggering unwanted events
         amount_field.addTextChangedListener(
             object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
@@ -47,7 +58,17 @@ class CurrencyConversionFragment : DaggerFragment(), CurrencyConversionView {
 
             }
         )
-        presenter.viewCreated(this)
+        compare_button.setOnClickListener {
+            amount_field.clearFocus()
+            presenter.onCompareClicked()
+        }
+        adapter.onCurrencyClicked = presenter::onRowClicked
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        presenter.onSaveState(outState)
+        adapter.saveState(outState)
     }
 
     override fun onDestroyView() {
@@ -55,12 +76,25 @@ class CurrencyConversionFragment : DaggerFragment(), CurrencyConversionView {
         super.onDestroyView()
     }
 
-    override fun displayInputHintText(hint: String) {
+    override fun showInputHintText(hint: String) {
         amount_layout.hint = hint
     }
 
-    override fun updateTable(rows: List<CurrencyConversionView.Row>) {
+    override fun showRows(rows: List<CurrencyConversionView.Row>) {
         adapter.updateItems(rows)
     }
+
+    override fun showError() {
+        Toast.makeText(context, R.string.error_message, LENGTH_LONG).show()
+    }
+
+    override fun showSelection(selection: CurrencyConversionView.Selection) {
+        adapter.updateSelection(selection)
+    }
+
+    override fun enableCompareButton(enabled: Boolean) {
+        compare_button.isEnabled = enabled
+    }
+
 
 }

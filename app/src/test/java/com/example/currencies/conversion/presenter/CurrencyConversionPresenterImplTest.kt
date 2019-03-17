@@ -52,12 +52,12 @@ class CurrencyConversionPresenterImplTest {
         whenSuspend{repository.getLatestCurrencyRates(any(), any())}.thenReturn(listOf(CurrencyRate(Currency.EUR, Currency.GBP, 1.10f, theDate)))
         presenter.viewCreated(view)
         presenter.onAmountTextChanged("10")
-        verify(view).updateTable(listOf(CurrencyConversionView.Row(Currency.GBP, "GBP", "11.0", false)))
+        verify(view).showRows(listOf(CurrencyConversionView.Row(Currency.GBP, "GBP", "11.0", false)))
         presenter.viewDestroyed()
         presenter.onAmountTextChanged("10")
         presenter.viewCreated(view)
         presenter.onAmountTextChanged("11")
-        verify(view, times(1)).updateTable(listOf(CurrencyConversionView.Row(Currency.GBP, "GBP", "12.1", false)))
+        verify(view, times(1)).showRows(listOf(CurrencyConversionView.Row(Currency.GBP, "GBP", "12.1", false)))
     }
 
     /**

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.currencies.R
+import com.example.currencies.common.entities.Amount
 import com.example.currencies.common.entities.Currency
 import com.example.currencies.compare.CurrencyComparePresenter
 import com.example.currencies.compare.CurrencyCompareView
@@ -34,17 +35,14 @@ class CurrencyCompareFragment : DaggerFragment(), CurrencyCompareView {
 
     companion object {
 
-        private const val ARG_BASE_CURRENCY = "arg_base_currency"
         private const val ARG_AMOUNT = "arg_amount"
         private const val ARG_FIRST_CURRENCY = "arg_first_currency"
         private const val ARG_SECOND_CURRENCY = "arg_second_currency"
 
-        fun createArgsBundle(baseCurrency: Currency,
-                             amount: Float,
+        fun createArgsBundle(amount: Amount,
                              firstCurrency: Currency,
                              secondCurrency: Currency): Bundle {
             return bundleOf(
-                ARG_BASE_CURRENCY to baseCurrency,
                 ARG_AMOUNT to amount,
                 ARG_FIRST_CURRENCY to firstCurrency,
                 ARG_SECOND_CURRENCY to secondCurrency

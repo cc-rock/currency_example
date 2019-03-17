@@ -1,13 +1,11 @@
 
 TO DO:
 
-- api call and json
-- presenter impl
-- ui and adapters
-- package structure
+- compare view
 - unit tests
 - espresso
-
-- check api success
--proguard (retrofit + moshi)
 - rotation and such
+
+BUGS:
+- up button not working
+- button state on "back"
