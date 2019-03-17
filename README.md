@@ -11,3 +11,4 @@ Nice to:
 - enlarge rows & divider
 - center spinner
 - invert first / second when navigating
+- system clock for tests
