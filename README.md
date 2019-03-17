@@ -20,9 +20,11 @@ Implementation notes
 Known issues / possible improvements
 ====================================
 
-- The back arrow in the second screen'a action bar does not work, and I haven't had time to figure out why.
+- The back arrow in the second screen's action bar does not work, and I haven't had time to figure out why.
   I would expect the Android Navigation components to handle it automatically, but I'm probably missing some detail,
-  being the first time I use this library.
+  being the first time I use this library. The back button, though, works as expected and can be used to navigate back.
+- Formatting rules are missing when displaying numbers: a fixed amount of decimal digits and alignment 
+  to the right would definitely look better.
 - Unit tests have been written only for the _currencies/conversion_ package (first screen of the app), as a demonstration
 of my ability to write them. In a real life scenario, I would have written them for all classes, except Android UI components 
 (activities, fragments, views, adapters)

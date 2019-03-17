@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencies.R
@@ -34,6 +35,9 @@ class CurrencyCompareFragment : DaggerFragment(), CurrencyCompareView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         currencies_table.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        currencies_table.addItemDecoration(
+            DividerItemDecoration(context, RecyclerView.VERTICAL)
+        )
         currencies_table.adapter = adapter
         presenter.viewCreated(this)
         arguments?.let {
