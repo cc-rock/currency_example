@@ -20,7 +20,7 @@ class FixerResponseConverter @Inject constructor() {
     }
 
     private fun stringToCurrency(code: String) =
-        Currency.values().firstOrNull { it.code == code } ?: throw Exception("Unknown currecncy")
+        Currency.values().firstOrNull { it.code == code } ?: throw Exception("Unknown currency")
 
     private fun stringToDate(formattedDate: String) = dateFormat.parse(formattedDate)
 

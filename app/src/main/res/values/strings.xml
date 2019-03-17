@@ -5,4 +5,6 @@
     <string name="compare">Compare</string>
     <string name="hint_text">Amount in %1$s</string>
     <string name="error_message">An error has occurred, please try again later.</string>
+    <string name="date">Date</string>
+    <string name="amount_and_currency">%1$f %2$s</string>
 </resources>

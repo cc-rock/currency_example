@@ -1,4 +1,4 @@
-package com.example.currencies.compare.ui
+package com.example.currencies.compare.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencies.R
 import com.example.currencies.compare.CurrencyCompareView
+import javax.inject.Inject
 
-class CurrencyCompareAdapter: RecyclerView.Adapter<CurrencyCompareAdapter.ViewHolder>() {
+class CurrencyCompareAdapter @Inject constructor(): RecyclerView.Adapter<CurrencyCompareAdapter.ViewHolder>() {
 
     private val items = emptyList<CurrencyCompareView.Row>().toMutableList()
     private var header: CurrencyCompareView.HeaderRow? = null
@@ -21,7 +22,7 @@ class CurrencyCompareAdapter: RecyclerView.Adapter<CurrencyCompareAdapter.ViewHo
 
     enum class ViewType {HEADER_VIEW_TYPE, ITEM_VIEW_TYPE}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyCompareAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutRes = when (viewType) {
             ViewType.ITEM_VIEW_TYPE.ordinal -> R.layout.currency_compare_list_item
             ViewType.HEADER_VIEW_TYPE.ordinal -> R.layout.currency_compare_header_item
@@ -45,7 +46,7 @@ class CurrencyCompareAdapter: RecyclerView.Adapter<CurrencyCompareAdapter.ViewHo
 
     override fun getItemCount() = items.size + headerOffset
 
-    override fun onBindViewHolder(holder: CurrencyCompareAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when {
             hasHeader && position == 0 -> header?.let { holder.bindHeader(it) }
             else -> holder.bindItem(items[position - headerOffset])

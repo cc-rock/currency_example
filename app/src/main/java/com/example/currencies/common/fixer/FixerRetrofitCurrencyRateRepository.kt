@@ -19,9 +19,9 @@ class FixerRetrofitCurrencyRateRepository @Inject constructor(private val fixerA
         targetCurrencies: List<Currency>
     ): List<CurrencyRate> = responseConverter.convert(
         fixerApi.latestRates(
-            API_KEY,
             inputConverter.currencyToString(baseCurrency),
-            inputConverter.currenciesToString(targetCurrencies)
+            inputConverter.currenciesToString(targetCurrencies),
+            API_KEY
         )
     )
 
@@ -31,10 +31,10 @@ class FixerRetrofitCurrencyRateRepository @Inject constructor(private val fixerA
         date: Date
     ): List<CurrencyRate> = responseConverter.convert(
         fixerApi.historicalRates(
-            API_KEY,
+            inputConverter.dateToString(date),
             inputConverter.currencyToString(baseCurrency),
             inputConverter.currenciesToString(targetCurrencies),
-            inputConverter.dateToString(date)
+            API_KEY
         )
     )
 

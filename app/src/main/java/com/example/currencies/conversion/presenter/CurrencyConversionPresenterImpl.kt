@@ -38,6 +38,8 @@ class CurrencyConversionPresenterImpl @Inject constructor(private val convertAmo
 
     private var view: CurrencyConversionView? = null
 
+    private var runningJob: Job? = null
+
     // current state
     private var currentSelection: CurrencyConversionView.Selection = CurrencyConversionView.Selection(null, null)
     private var lastQueriedAmount: Amount? = null
@@ -67,8 +69,12 @@ class CurrencyConversionPresenterImpl @Inject constructor(private val convertAmo
     }
 
     private fun retrieveAndShowData(amountToConvert: Amount) {
+        runningJob?.cancel()
         // launch coroutine in our scope (on main thread)
-        launch {
+        runningJob = launch {
+            view?.enableCompareButton(false)
+            delay(300) // debouncing
+
             val convertedAmounts = try {
                 // execute use case on worker thread
                 withContext(ioDispatcher) {
@@ -89,6 +95,7 @@ class CurrencyConversionPresenterImpl @Inject constructor(private val convertAmo
                     )
                 }
             )
+            updateButton()
             lastQueriedAmount = amountToConvert
         }
     }
