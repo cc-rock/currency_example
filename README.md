@@ -29,4 +29,5 @@ Known issues / possible improvements
 of my ability to write them. In a real life scenario, I would have written them for all classes, except Android UI components 
 (activities, fragments, views, adapters)
 - Only a simple Espresso test is included, as an example. 
+- Proguard rules are not in place, so please run the debug build only.. the release one is probably going to have some issues.
 
