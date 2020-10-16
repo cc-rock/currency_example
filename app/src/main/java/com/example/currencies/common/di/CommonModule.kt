@@ -16,23 +16,19 @@ import javax.inject.Named
 @Module
 abstract class CommonModule {
 
-    @Module
     companion object {
 
         const val MAIN_DISPATCHER = "MAIN_DISPATCHER"
         const val IO_DISPATCHER = "IO_DISPATCHER"
 
-        @JvmStatic
         @Provides
         @Named(MAIN_DISPATCHER)
         fun provideMainThreadCoroutineDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
-        @JvmStatic
         @Provides
         @Named(IO_DISPATCHER)
         fun provideIoCoroutineDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
-        @JvmStatic
         @Provides
         fun provideFixerApi(): FixerApi {
             return Retrofit.Builder()

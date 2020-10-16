@@ -83,6 +83,7 @@ class CurrencyConversionPresenterImpl @Inject constructor(private val convertAmo
             } catch (e: Throwable) {
                 if (e !is CancellationException) {
                     view?.showError()
+                    android.util.Log.d("CurrencyConversionPres", "Error", e)
                 }
                 return@launch
             }
